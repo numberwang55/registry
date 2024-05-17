@@ -1,17 +1,21 @@
 import type { Params } from "react-router-dom";
 import { getPackage } from "../../api/queries/getPackage";
+import { PackageDetails } from "../../api/types/packageDetails";
 
-export interface detailsLoaderResult {
-  
+interface LoaderArgs {
+  params: Params
 }
 
-export async function detailsLoader({ params }: { params: Params }) {
-  const { name } = params;
+export interface DetailsLoaderResult {
+  details: PackageDetails
+}
+
+export async function detailsLoader({ params: { name } }: LoaderArgs): Promise<DetailsLoaderResult> {
   if (!name) {
     throw new Error("Name must be provided");
   }
   const details = await getPackage(name);
   return {
-    details
+    details,
   };
 }
