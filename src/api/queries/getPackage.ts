@@ -1,4 +1,4 @@
-import { PackageDetails } from "../types/packageDetails";
+import type { PackageDetails } from "../types/packageDetails";
 
 export async function getPackage(name: string): Promise<PackageDetails> {
   const result = await fetch(`https://registry.npmjs.org/${name}`)
